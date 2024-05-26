@@ -69,7 +69,6 @@ const AddJobModal: React.FC<AddJobModalProps> = ({ onClose }) => {
       return;
     }
 
-    console.log("newJob", newJob);
     try {
       await addJobPost(newJob);
       onClose(true);

@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import { DateRange, RangeKeyDict } from "react-date-range";
-import "react-date-range/dist/styles.css"; // main css file
-import "react-date-range/dist/theme/default.css"; // theme css file
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 import { ko } from "date-fns/locale";
 
 type DateRangePickerProps = {
