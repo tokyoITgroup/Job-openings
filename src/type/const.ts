@@ -1,5 +1,5 @@
 export type JobGet = {
-  id: string;
+  id: number;
   companyName: string;
   title: string;
   areaTag: string;

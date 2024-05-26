@@ -24,10 +24,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateSelect }) => {
         endDate: range.endDate,
         key: range.key || "selection",
       });
-      onDateSelect(
-        range.startDate.toISOString().split("T")[0],
-        range.endDate.toISOString().split("T")[0]
-      );
+      onDateSelect(range.startDate.toISOString(), range.endDate.toISOString());
     }
   };
 

@@ -3,29 +3,24 @@ import { useState, useEffect } from "react";
 import JobCard from "../components/JobCard";
 import AddJobModal from "../components/AddJobModal";
 import { JobGet } from "../type/const";
-import axios from "axios";
+import { fetchJobPosts } from "../api";
 
 const JobPostsPage = () => {
   const [jobPosts, setJobPosts] = useState<JobGet[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    const fetchJobPosts = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_SERVER_ENDPOINT}/gamzaApi/v1/list`,
-          {
-            withCredentials: true,
-          }
-        );
-        console.log("JobPostsPage: data", response.data);
-        setJobPosts(response.data);
-      } catch (error) {
-        console.error("Error fetching job posts:", error);
-      }
-    };
+  const getJobPosts = async () => {
+    try {
+      const data = await fetchJobPosts();
+      console.log("JobPostsPage: data", data);
+      setJobPosts(data);
+    } catch (error) {
+      console.error("Error fetching job posts:", error);
+    }
+  };
 
-    fetchJobPosts();
+  useEffect(() => {
+    getJobPosts();
   }, []);
 
   return (
@@ -53,7 +48,16 @@ const JobPostsPage = () => {
           />
         ))}
       </div>
-      {isModalOpen && <AddJobModal onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && (
+        <AddJobModal
+          onClose={(refresh) => {
+            setIsModalOpen(false);
+            if (refresh) {
+              getJobPosts();
+            }
+          }}
+        />
+      )}
     </div>
   );
 };

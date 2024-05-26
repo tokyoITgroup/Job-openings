@@ -3,9 +3,10 @@ import React, { useState } from "react";
 import DateRangePicker from "./DateRangePicker";
 import { JobPost } from "../type/const";
 import axios from "axios";
+import { addJobPost } from "../api";
 
 type AddJobModalProps = {
-  onClose: () => void;
+  onClose: (refresh?: boolean) => void;
 };
 
 const AddJobModal: React.FC<AddJobModalProps> = ({ onClose }) => {
@@ -18,7 +19,8 @@ const AddJobModal: React.FC<AddJobModalProps> = ({ onClose }) => {
   const [endDate, setEndDate] = useState("");
 
   const handleDateSelect = (startDate: string, endDate: string) => {
-    setEndDate(endDate);
+    const isoEndDate = new Date(endDate).toISOString();
+    setEndDate(isoEndDate);
   };
 
   const handleSubmit = async () => {
@@ -31,23 +33,11 @@ const AddJobModal: React.FC<AddJobModalProps> = ({ onClose }) => {
       salaryMax,
       endDate,
     };
+    console.log("newJob", newJob);
 
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_SERVER_ENDPOINT}/gamzaApi/v1/add`,
-        newJob,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        onClose();
-      } else {
-        console.error("Failed to add job");
-      }
+      await addJobPost(newJob);
+      onClose(true);
     } catch (error) {
       console.error("Error adding job:", error);
     }
@@ -125,7 +115,7 @@ const AddJobModal: React.FC<AddJobModalProps> = ({ onClose }) => {
         </div>
         <div className="flex justify-end">
           <button
-            onClick={onClose}
+            onClick={() => onClose(false)}
             className="bg-gray-500 text-white p-2 rounded mr-2"
           >
             취소

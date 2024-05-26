@@ -1,8 +1,38 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: ['@svgr/webpack'],
+    });
+
+    return config;
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+      {
+        protocol: 'http',
+        hostname: '**',
+      },
+    ],
+  },
+  output: 'standalone',
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://localhost:8080/:path*',
+      },
+    ];
+  },
   env: {
-    BACKEND_SERVER_ENDPOINT: process.env.BACKEND_SERVER_ENDPOINT,
+    NEXT_PUBLIC_BACKEND_SERVER_ENDPOINT:
+      process.env.NEXT_PUBLIC_BACKEND_SERVER_ENDPOINT,
   },
 };
 
