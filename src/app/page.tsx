@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import JobCard from "../components/JobCard";
 import AddJobModal from "../components/AddJobModal";
 import { JobGet } from "../type/const";
+import axios from "axios";
 
 const JobPostsPage = () => {
   const [jobPosts, setJobPosts] = useState<JobGet[]>([]);
@@ -10,10 +11,18 @@ const JobPostsPage = () => {
 
   useEffect(() => {
     const fetchJobPosts = async () => {
-      const response = await fetch("/api/job-posts");
-      const data = await response.json();
-      console.log("JobPostsPage: data", data);
-      setJobPosts(data);
+      try {
+        const response = await axios.get(
+          `${process.env.BACKEND_SERVER_ENDPOINT}/gamzaApi/v1/list`,
+          {
+            withCredentials: true,
+          }
+        );
+        console.log("JobPostsPage: data", response.data);
+        setJobPosts(response.data);
+      } catch (error) {
+        console.error("Error fetching job posts:", error);
+      }
     };
 
     fetchJobPosts();
