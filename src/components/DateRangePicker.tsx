@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import { DateRange, RangeKeyDict } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -15,7 +15,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onDateSelect }) => {
     endDate: new Date(),
     key: "selection",
   });
-  console.log("selectionRange", selectionRange.endDate);
+
   const handleSelect = (ranges: RangeKeyDict) => {
     const range = ranges.selection;
     if (range.startDate && range.endDate) {
