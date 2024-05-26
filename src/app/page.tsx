@@ -13,7 +13,7 @@ const JobPostsPage = () => {
     const fetchJobPosts = async () => {
       try {
         const response = await axios.get(
-          `${process.env.BACKEND_SERVER_ENDPOINT}/gamzaApi/v1/list`,
+          `${process.env.NEXT_PUBLIC_BACKEND_SERVER_ENDPOINT}/gamzaApi/v1/list`,
           {
             withCredentials: true,
           }
