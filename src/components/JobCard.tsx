@@ -23,9 +23,6 @@ const cardStyle = css`
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
-  @media (min-width: 1200px) {
-    height: 300px;
-  }
 `;
 
 const titleStyle = css`
@@ -67,6 +64,7 @@ const JobCard: React.FC<JobCardProps> = ({
   salaryMax,
   dDay,
 }) => {
+  const displayDDay = dDay === -1 ? 0 : dDay;
   return (
     <div css={cardStyle}>
       <h2 css={titleStyle}>{companyName}</h2>
@@ -77,7 +75,7 @@ const JobCard: React.FC<JobCardProps> = ({
       <p css={salaryStyle}>
         {salaryMin} ~ {salaryMax} 万円
       </p>
-      <p css={dDayStyle}>D-{dDay}</p>
+      <p css={dDayStyle}>D-{displayDDay}</p>
     </div>
   );
 };
