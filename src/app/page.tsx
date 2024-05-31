@@ -35,7 +35,7 @@ const JobPostsPage = () => {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
-    <div className="container mx-auto p-6 bg-gray-100 min-h-screen flex flex-col">
+    <div className="container mx-auto p-6 bg-gray-100 flex flex-col">
       <div className="text-3xl font-bold mb-6 text-center text-blue-600">
         일본 IT 채용공고
       </div>
