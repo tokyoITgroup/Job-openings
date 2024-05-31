@@ -143,11 +143,11 @@ const AddJobModal: React.FC<AddJobModalProps> = ({ onClose }) => {
           )}
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 mb-2">채용방식</label>
+          <label className="block text-gray-700 mb-2">내정자</label>
           <input
             type="text"
             value={position}
-            placeholder="정규직, 계약직, 인턴,.."
+            placeholder="성함,닉네임"
             onChange={(e) => {
               setPosition(e.target.value);
               setErrors((prev) => ({ ...prev, position: "" }));
@@ -159,7 +159,7 @@ const AddJobModal: React.FC<AddJobModalProps> = ({ onClose }) => {
           )}
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 mb-2">최저 연봉</label>
+          <label className="block text-gray-700 mb-2">희망최저 연봉</label>
           <input
             type="number"
             value={salaryMin}
@@ -176,7 +176,7 @@ const AddJobModal: React.FC<AddJobModalProps> = ({ onClose }) => {
           )}
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700">최대 연봉</label>
+          <label className="block text-gray-700">희망최대 연봉</label>
           <input
             type="number"
             value={salaryMax}

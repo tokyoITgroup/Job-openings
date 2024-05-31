@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { css } from "@emotion/react";
 
 type JobCardProps = {
@@ -23,6 +22,9 @@ const cardStyle = css`
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  @media (min-width: 1200px) {
+    height: 300px;
   }
 `;
 
@@ -67,8 +69,8 @@ const JobCard: React.FC<JobCardProps> = ({
 }) => {
   return (
     <div css={cardStyle}>
-      <h2 css={titleStyle}>{title}</h2>
-      <p css={companyStyle}>{companyName}</p>
+      <h2 css={titleStyle}>{companyName}</h2>
+      <p css={companyStyle}>{title}</p>
       <p css={tagStyle}>
         {areaTag} / {positionTag}
       </p>
